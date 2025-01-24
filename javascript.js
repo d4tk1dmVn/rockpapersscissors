@@ -1,14 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
 let play = true;
-//TAKE PLAYER INPUT
-function getHumanChoice() {
-  let choice = prompt("CHOOSE HUMAN: rock, paper OR scissors?", "");
-  if (choice !== null) {
-    choice = choice.toLowerCase();
-  }
-  return choice;
-}
 
 //CALCULATE COMPUTER CHOICE
 function getComputerChoice() {
@@ -82,9 +74,19 @@ function playGame() {
   }
   const computerChoice = getComputerChoice();
   alert(playRound(humanChoice, computerChoice));
-  alert("Humans: " + humanScore + " || Computers: " + computerScore);
+  alert();
 }
 
-while (play) {
-  playGame();
-}
+let messageboard = document.querySelector("#messageboard");
+let scoreboard = document.querySelector("#scoreboard");
+let buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const human_choice = button.textContent.toLowerCase();
+    const computer_choice = getComputerChoice();
+    messageboard.textContent = playRound(human_choice, computer_choice);
+    scoreboard.textContent =
+      "Humans: " + humanScore + " || Computers: " + computerScore;
+  });
+});
